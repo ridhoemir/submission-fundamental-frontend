@@ -8,48 +8,52 @@ import DataSource from '../data/data-source';
 const main = () => {
   const searchElement = document.querySelector('search-bar');
   const cardListElement = document.querySelector('card-list');
+
   const onButtonSearchClicked = async () => {
     try {
       const result = await DataSource.searchCocktail(searchElement.value);
+      console.log(result);
       renderCocktailResult(result);
     } catch (message) {
       fallbackResult(message);
     }
   };
 
-  const onButtonFilterCategory = async () => {
+  const onButtonFilterCategory = async function () {
     try {
+      console.log(this.innerText);
       const data = await DataSource.filterCocktailByCategories(this.innerText);
       const result = [];
       data.forEach(async (item) => {
         const temp = await DataSource.getCocktailById(item.idDrink);
         const drink = {
-          idDrink: temp.idDrink,
-          strCategory: temp.strCategory,
-          strAlcoholic: temp.strAlcoholic,
-          strDrink: temp.strDrink,
-          strDrinkThumb: temp.strDrinkThumb,
+          idDrink: temp[0].idDrink,
+          strCategory: temp[0].strCategory,
+          strAlcoholic: temp[0].strAlcoholic,
+          strDrink: temp[0].strDrink,
+          strDrinkThumb: temp[0].strDrinkThumb,
         };
         result.push(drink);
       });
       renderCocktailResult(result);
+      console.log(result);
     } catch (message) {
       fallbackResult(message);
     }
   };
 
-  const onButtonFilterAlcoholic = async () => {
+  const onButtonFilterAlcoholic = async function () {
     try {
       const data = await DataSource.filterCocktailByAlcoholic(this.innerText);
       const result = [];
       data.forEach(async (item) => {
         const temp = await DataSource.getCocktailById(item.idDrink);
         const drink = {
-          idDrink: temp.idDrink,
-          strCategory: temp.strCategory,
-          strAlcoholic: temp.strAlcoholic,
-          strDrink: temp.strDrink,
-          strDrinkThumb: temp.strDrinkThumb,
+          idDrink: temp[0].idDrink,
+          strCategory: temp[0].strCategory,
+          strAlcoholic: temp[0].strAlcoholic,
+          strDrink: temp[0].strDrink,
+          strDrinkThumb: temp[0].strDrinkThumb,
         };
         result.push(drink);
       });

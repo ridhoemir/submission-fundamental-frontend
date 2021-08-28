@@ -9,19 +9,14 @@ class FilterList extends HTMLElement {
     this.render();
   }
 
-  // set clickEvent(event) {
-  //   this._clickEvent = event;
-  //   this.render();
-  // }
-
   render() {
     this._filters.forEach((filter) => {
       const filterItemElement = document.createElement('filter-item');
       const data = {
         type: filter[this._type],
-        event: this._event,
       };
       filterItemElement.filter = data;
+      filterItemElement.addEventListener('click', this._event);
       this.appendChild(filterItemElement);
     });
   }
