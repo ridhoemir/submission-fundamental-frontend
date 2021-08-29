@@ -7,13 +7,11 @@ import DataSource from '../data/data-source';
 
 const main = () => {
   const searchElement = document.querySelector('search-bar');
-  const section = document.querySelector('section');
-  // const cardListElement = document.querySelector('card-list');
+  const cardListElement = document.querySelector('card-list');
 
   const onButtonSearchClicked = async () => {
     try {
       const result = await DataSource.searchCocktail(searchElement.value);
-      console.log(result);
       renderCocktailResult(result);
     } catch (message) {
       fallbackResult(message);
@@ -22,7 +20,6 @@ const main = () => {
 
   const onButtonFilterCategory = async function () {
     try {
-      console.log(this.innerText);
       const data = await DataSource.filterCocktailByCategories(this.innerText.trimStart());
       const result = [];
       data.forEach(async (item) => {
@@ -34,10 +31,18 @@ const main = () => {
           strDrink: temp[0].strDrink,
           strDrinkThumb: temp[0].strDrinkThumb,
         };
+        let count = 1;
+        let ingredient = temp[0][`strIngredient${count}`];
+        while (ingredient !== null && ingredient !== undefined && ingredient !== '') {
+          drink[`strIngredient${count}`] = ingredient;
+          count += 1;
+          ingredient = temp[0][`strIngredient${count}`];
+        }
         result.push(drink);
+        renderCocktailResult(result);
+        // console.log(result);
       });
-      renderCocktailResult(result);
-      // console.log(result);
+      console.log(result);
     } catch (message) {
       fallbackResult(message);
     }
@@ -56,9 +61,16 @@ const main = () => {
           strDrink: temp[0].strDrink,
           strDrinkThumb: temp[0].strDrinkThumb,
         };
+        let count = 1;
+        let ingredient = temp[0][`strIngredient${count}`];
+        while (ingredient !== null && ingredient !== undefined && ingredient !== '') {
+          drink[`strIngredient${count}`] = ingredient;
+          count += 1;
+          ingredient = temp[0][`strIngredient${count}`];
+        }
         result.push(drink);
+        renderCocktailResult(result);
       });
-      renderCocktailResult(result);
     } catch (message) {
       fallbackResult(message);
     }
@@ -98,17 +110,17 @@ const main = () => {
     }
   };
 
-  const renderCocktailResult = async (data) => {
-    const cardListElement = document.createElement('card-list');
+  const renderCocktailResult = (data) => {
     cardListElement.cards = data;
-    section.appendChild(cardListElement);
+    data.forEach((item) => {
+      console.log(item.idDrink);
+      console.log(item.strDrinkThumb);
+      console.log(item.strDrink);
+    });
   };
 
   const fallbackResult = (message) => {
-    // cardListElement.renderError(message);
-    section.innerHTML = '';
-    section.innerHTML += `
-    <h2 class="placeholder">${message}</h2>`;
+    cardListElement.renderError(message);
   };
 
   document.addEventListener('DOMContentLoaded', () => {

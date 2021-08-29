@@ -24,7 +24,7 @@ class CardItem extends HTMLElement {
     const ingredientField = this.querySelector('.ingredient');
     let count = 1;
     let ingredient = this._cocktail[`strIngredient${count}`];
-    while (ingredient !== undefined && ingredient !== null) {
+    while (ingredient !== undefined && ingredient !== null && ingredient !== '') {
       ingredientField.innerHTML += `<li>${ingredient}</li>`;
       count += 1;
       ingredient = this._cocktail[`strIngredient${count}`];
