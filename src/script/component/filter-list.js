@@ -10,6 +10,7 @@ class FilterList extends HTMLElement {
   }
 
   render() {
+    this.innerHTML = '';
     this._filters.forEach((filter) => {
       const filterItemElement = document.createElement('filter-item');
       const data = {

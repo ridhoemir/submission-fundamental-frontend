@@ -7,7 +7,8 @@ import DataSource from '../data/data-source';
 
 const main = () => {
   const searchElement = document.querySelector('search-bar');
-  const cardListElement = document.querySelector('card-list');
+  const section = document.querySelector('section');
+  // const cardListElement = document.querySelector('card-list');
 
   const onButtonSearchClicked = async () => {
     try {
@@ -22,7 +23,7 @@ const main = () => {
   const onButtonFilterCategory = async function () {
     try {
       console.log(this.innerText);
-      const data = await DataSource.filterCocktailByCategories(this.innerText);
+      const data = await DataSource.filterCocktailByCategories(this.innerText.trimStart());
       const result = [];
       data.forEach(async (item) => {
         const temp = await DataSource.getCocktailById(item.idDrink);
@@ -36,7 +37,7 @@ const main = () => {
         result.push(drink);
       });
       renderCocktailResult(result);
-      console.log(result);
+      // console.log(result);
     } catch (message) {
       fallbackResult(message);
     }
@@ -44,7 +45,7 @@ const main = () => {
 
   const onButtonFilterAlcoholic = async function () {
     try {
-      const data = await DataSource.filterCocktailByAlcoholic(this.innerText);
+      const data = await DataSource.filterCocktailByAlcoholic(this.innerText.trimStart());
       const result = [];
       data.forEach(async (item) => {
         const temp = await DataSource.getCocktailById(item.idDrink);
@@ -98,11 +99,16 @@ const main = () => {
   };
 
   const renderCocktailResult = async (data) => {
+    const cardListElement = document.createElement('card-list');
     cardListElement.cards = data;
+    section.appendChild(cardListElement);
   };
 
   const fallbackResult = (message) => {
-    cardListElement.renderError(message);
+    // cardListElement.renderError(message);
+    section.innerHTML = '';
+    section.innerHTML += `
+    <h2 class="placeholder">${message}</h2>`;
   };
 
   document.addEventListener('DOMContentLoaded', () => {

@@ -7,7 +7,7 @@ class FilterItem extends HTMLElement {
 
   render() {
     this.innerHTML = `
-    <button id="filterItem">${this._type}</button>`;
+    <button id="filterItem">${this._type.trimStart()}</button>`;
   }
 
   renderError(message) {
