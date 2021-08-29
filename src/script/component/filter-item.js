@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 class FilterItem extends HTMLElement {
   set filter(filter) {
     this._type = filter.type;

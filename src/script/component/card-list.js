@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import './card-item';
 
 class CardList extends HTMLElement {

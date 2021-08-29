@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-use-before-define */
 import '../component/filter-list';
 import '../component/search-bar';
 import '../component/card-list';
@@ -40,9 +38,7 @@ const main = () => {
         }
         result.push(drink);
         renderCocktailResult(result);
-        // console.log(result);
       });
-      console.log(result);
     } catch (message) {
       fallbackResult(message);
     }
@@ -112,11 +108,6 @@ const main = () => {
 
   const renderCocktailResult = (data) => {
     cardListElement.cards = data;
-    data.forEach((item) => {
-      console.log(item.idDrink);
-      console.log(item.strDrinkThumb);
-      console.log(item.strDrink);
-    });
   };
 
   const fallbackResult = (message) => {
@@ -127,7 +118,6 @@ const main = () => {
     renderFilterCategory();
     renderFilterAlcoholic();
     searchElement.clickEvent = onButtonSearchClicked;
-    // searchElement.clickEvent = onButtonFilterCategory;
   });
 };
 

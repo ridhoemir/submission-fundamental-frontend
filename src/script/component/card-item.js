@@ -1,4 +1,5 @@
-/* eslint-disable no-underscore-dangle */
+import './filter-item';
+
 class CardItem extends HTMLElement {
   set cocktail(cocktail) {
     this._cocktail = cocktail;

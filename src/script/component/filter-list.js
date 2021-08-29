@@ -1,6 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-import './filter-item';
-
 class FilterList extends HTMLElement {
   set filters(filters) {
     this._filters = filters.result;

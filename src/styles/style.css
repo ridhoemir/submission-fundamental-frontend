@@ -21,10 +21,9 @@ main {
   overflow: auto;
 }
 section {
-  margin: 10px 10% 10px auto;
+  margin: 10px auto ;
   width: 100%;
-  max-width: 900px;
-  padding: 10px;
+  max-width: 950px;
   display: block;
 }
 aside {
@@ -107,7 +106,7 @@ search-bar{
 }
 card-list {
   display: flex;
-  max-width: 900px;
+  max-width: 950px;
   flex-direction: row;
   flex-wrap: wrap;
 }
@@ -116,7 +115,33 @@ card-item {
   width: 100%;
   max-width: 270px;
   display: block;
+  border: 1px solid var(--main-color);
+  margin: 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: -1px 1px 7px 0px var(--main-color);
+  -webkit-box-shadow: -1px 1px 7px 0px var(--main-color);
+  -moz-box-shadow: -1px 1px 7px 0px var(--main-color);
+  transition: 0.2s;
+}
+card-item:hover {
+  box-shadow: -1px 1px 12px 0px var(--main-color);
+  -webkit-box-shadow: -1px 1px 12px 0px var(--main-color);
+  -moz-box-shadow: -1px 1px 12px 0px var(--main-color);
 }
 card-item img {
   max-width: 230px;
+  border-radius: 7px;
+}
+.card-info h4,li {
+  margin: 5px;
+  color: var(--main-color);
+}
+.card-info h4, li, button {
+  text-align: left;
+}
+@media screen and (max-width: 450px) {
+  main{
+    flex-direction: column;
+  }
 }
